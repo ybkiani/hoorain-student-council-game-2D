@@ -1,6 +1,735 @@
-:root{--ink:#2d2a55;--purple:#7357c7;--pink:#e95aa2;--cream:#fff9e9;--green:#58b69a;--line:#ded8ef}*{box-sizing:border-box}body{margin:0;font-family:Trebuchet MS,Arial,sans-serif;background:linear-gradient(#dff3ff,#fff6dc);color:var(--ink);min-height:100vh}button{font:inherit}.topbar{max-width:980px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:flex-end;padding:14px 18px;background:#fff;border-radius:0 0 20px 20px;box-shadow:0 4px 18px #5c548022}.icon-btn{border:0;background:#f2edff;border-radius:50%;width:44px;height:44px;cursor:pointer}.screen{display:none;max-width:980px;margin:24px auto;padding:22px}.screen.active{display:flex}.start-screen{min-height:650px;align-items:center;justify-content:space-between;gap:30px;background:rgba(255,255,255,.72);border:3px solid #fff;border-radius:30px;overflow:hidden}.start-copy{max-width:520px;padding:25px}.badge{display:inline-block;background:#f2b63d;padding:8px 16px;border-radius:999px;font-weight:900;letter-spacing:1px}.start-copy h1{font-size:clamp(40px,6vw,70px);line-height:.95;margin:18px 0;color:#b83b85}.start-copy p{font-size:19px;line-height:1.55}.hero{width:min(43%,390px);align-self:flex-end;filter:drop-shadow(0 10px 8px #554e7930)}.primary{border:0;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;padding:14px 24px;border-radius:16px;font-weight:900;font-size:18px;cursor:pointer;box-shadow:0 6px 0 #4e3a8c}.primary:active{transform:translateY(3px);box-shadow:0 3px 0 #4e3a8c}#play{display:none;flex-direction:column;gap:14px}#play.active{display:flex}.progress{height:14px;background:#fff;border-radius:20px;overflow:hidden;border:2px solid #fff}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--green),#f2b63d);transition:width .4s}.scene{height:350px;position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(#bfe9ff 0 55%,#8dcc82 55%);border:4px solid #fff}.scene:after{content:'🏫';font-size:180px;position:absolute;right:50px;bottom:30px;opacity:.92}.scene-title{position:absolute;left:18px;top:18px;z-index:3;background:#fff;padding:9px 14px;border-radius:14px;font-weight:900}.player{position:absolute;left:4%;bottom:-38px;width:260px;z-index:4;filter:drop-shadow(0 7px 5px #0002)}.npc{position:absolute;right:22%;bottom:30px;font-size:105px;z-index:4}.dialogue{background:#fff;border-radius:26px;padding:24px;border:3px solid #eee7ff}.speaker{font-weight:900;color:var(--purple);margin:0}.dialogue h2{margin:7px 0 18px;font-size:25px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choice{border:2px solid var(--line);background:#faf8ff;color:var(--ink);padding:14px;border-radius:15px;text-align:left;cursor:pointer;font-weight:700;min-height:60px}.choice:hover,.choice:focus{border-color:var(--purple);background:#f1edff}.choice:disabled{cursor:default;opacity:.7}.choice.good{background:#e3f8ef;border-color:#58b69a}.feedback{font-weight:800;min-height:24px}.hidden{display:none}.finish-screen{justify-content:center;text-align:center}.certificate{background:#fffdf4;border:10px double #e0ad3d;border-radius:28px;padding:36px;max-width:700px;width:100%;box-shadow:0 12px 35px #554e7930}.medal{font-size:70px}.eyebrow{letter-spacing:3px;font-weight:900;color:#a57816}.certificate h1{font-size:42px;color:#b83b85}.final-score{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:24px}.award{border:2px solid #e0ad3d;border-radius:18px;padding:18px;margin:22px auto;font-size:20px;max-width:430px}.confetti{position:absolute;font-size:28px;letter-spacing:15px}@media(max-width:650px){.topbar{font-size:13px;gap:8px}.screen{margin:10px;padding:12px}.start-screen{min-height:auto;flex-direction:column;padding-top:20px}.start-copy{padding:12px}.hero{width:70%}.scene{height:300px}.scene:after{font-size:130px;right:10px}.player{width:190px;bottom:-28px;left:2%}.npc{font-size:75px;right:12%;bottom:38px}.choices{grid-template-columns:1fr}.certificate{padding:22px 15px}.certificate h1{font-size:32px}}
-/* Interactive edition additions */
-.mission-chip{position:absolute;left:16px;bottom:14px;background:rgba(255,255,255,.94);padding:8px 12px;border-radius:14px;font-weight:800;color:#5b459e;box-shadow:0 4px 12px #0002;z-index:5}
-.poster{position:absolute;right:18px;top:58px;width:150px;background:#fff8d8;border:5px solid #7357c7;border-radius:12px;padding:10px;text-align:center;color:#5b459e;font-weight:900;line-height:1.15;transform:rotate(2deg);box-shadow:0 5px 12px #0002}.poster small{display:block;color:#d34b7c;margin-top:5px}
-.challenge{margin-top:12px;padding:14px;border:2px dashed #cbbdf2;border-radius:18px;background:#faf8ff}.challenge.hidden{display:none}.challenge-title{font-weight:900;color:#5b459e;margin:0 0 8px}.collect-zone{position:relative;height:145px;border-radius:15px;background:linear-gradient(#dff5ff 0 55%,#c8efb7 55%);overflow:hidden}.collect-star{position:absolute;border:0;background:transparent;font-size:31px;cursor:pointer;filter:drop-shadow(0 3px 2px #0002);animation:bob 1.2s ease-in-out infinite alternate}.collect-star:disabled{opacity:0;pointer-events:none}.object-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.object-btn{min-height:56px;border:2px solid #ded5f6;background:white;border-radius:14px;font-size:24px;cursor:pointer}.object-btn.found{background:#e6ffe9;border-color:#6cc87a}.mini-status{font-weight:800;color:#6b5a9c;margin:8px 0 0}.achievement{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) scale(.8);background:#fff;border:4px solid #ffd34f;border-radius:20px;padding:14px 20px;font-weight:900;color:#6a4b00;box-shadow:0 10px 30px #0003;z-index:20;opacity:0;pointer-events:none}.achievement.show{animation:popAward 1.5s ease forwards}@keyframes popAward{0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}20%,75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.05)}}@keyframes bob{to{transform:translateY(-7px) rotate(7deg)}}
-@media(max-width:620px){.poster{width:112px;font-size:12px;right:8px;top:52px}.mission-chip{font-size:12px;left:8px;bottom:8px}.collect-zone{height:125px}}
+:root{
+  --ink:#2d2a55;
+  --purple:#7357c7;
+  --pink:#e95aa2;
+  --cream:#fff9e9;
+  --green:#58b69a;
+  --line:#ded8ef;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Trebuchet MS,Arial,sans-serif;
+  background:linear-gradient(#dff3ff,#fff6dc);
+  color:var(--ink);
+  min-height:100vh;
+}
+
+button{
+  font:inherit;
+}
+
+/* =========================
+   TOP BAR
+   ========================= */
+
+.topbar{
+  max-width:980px;
+  margin:auto;
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:flex-end;
+  padding:14px 18px;
+  background:#fff;
+  border-radius:0 0 20px 20px;
+  box-shadow:0 4px 18px #5c548022;
+}
+
+.icon-btn{
+  border:0;
+  background:#f2edff;
+  border-radius:50%;
+  width:44px;
+  height:44px;
+  cursor:pointer;
+}
+
+/* =========================
+   GENERAL SCREENS
+   ========================= */
+
+.screen{
+  display:none;
+  max-width:980px;
+  margin:24px auto;
+  padding:22px;
+}
+
+.screen.active{
+  display:flex;
+}
+
+/* =========================
+   START SCREEN
+   ========================= */
+
+.start-screen{
+  min-height:650px;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  background:rgba(255,255,255,.72);
+  border:3px solid #fff;
+  border-radius:30px;
+  overflow:hidden;
+}
+
+.start-copy{
+  max-width:520px;
+  padding:25px;
+}
+
+.badge{
+  display:inline-block;
+  background:#f2b63d;
+  padding:8px 16px;
+  border-radius:999px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.start-copy h1{
+  font-size:clamp(40px,6vw,70px);
+  line-height:.95;
+  margin:18px 0;
+  color:#b83b85;
+}
+
+.start-copy p{
+  font-size:19px;
+  line-height:1.55;
+}
+
+/* Hoorain on opening screen */
+.hero{
+  width:min(43%,390px);
+  align-self:flex-end;
+  filter:drop-shadow(0 10px 8px #554e7930);
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.primary{
+  border:0;
+  background:linear-gradient(
+    135deg,
+    var(--purple),
+    var(--pink)
+  );
+  color:white;
+  padding:14px 24px;
+  border-radius:16px;
+  font-weight:900;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 6px 0 #4e3a8c;
+}
+
+.primary:active{
+  transform:translateY(3px);
+  box-shadow:0 3px 0 #4e3a8c;
+}
+
+/* =========================
+   PLAY SCREEN
+   ========================= */
+
+#play{
+  display:none;
+  flex-direction:column;
+  gap:14px;
+}
+
+#play.active{
+  display:flex;
+}
+
+/* =========================
+   PROGRESS BAR
+   ========================= */
+
+.progress{
+  height:14px;
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  border:2px solid #fff;
+}
+
+.progress div{
+  height:100%;
+  width:0;
+  background:linear-gradient(
+    90deg,
+    var(--green),
+    #f2b63d
+  );
+  transition:width .4s;
+}
+
+/* =========================
+   MAIN MISSION SCENE
+   ========================= */
+
+/*
+   Increased from 350px to 430px
+   so the larger Hoorain character fits.
+*/
+.scene{
+  height:430px;
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  background:linear-gradient(
+    #bfe9ff 0 55%,
+    #8dcc82 55%
+  );
+  border:4px solid #fff;
+}
+
+/* School building */
+.scene:after{
+  content:'🏫';
+  font-size:180px;
+  position:absolute;
+  right:50px;
+  bottom:30px;
+  opacity:.92;
+}
+
+/* Scene title */
+.scene-title{
+  position:absolute;
+  left:18px;
+  top:18px;
+  z-index:6;
+  background:#fff;
+  padding:9px 14px;
+  border-radius:14px;
+  font-weight:900;
+}
+
+/* =========================
+   HOORAIN - MISSION PAGES
+   ========================= */
+
+/*
+   THIS CONTROLS HOORAIN ON
+   ALL QUESTION/MISSION PAGES.
+
+   Previous width was 260px.
+   New width is 380px.
+*/
+.player{
+  position:absolute;
+  left:2%;
+  bottom:-5px;
+
+  width:380px;
+  height:410px;
+
+  object-fit:contain;
+  object-position:left bottom;
+
+  z-index:4;
+
+  filter:drop-shadow(
+    0 7px 5px #0002
+  );
+}
+
+/* =========================
+   OTHER CHARACTER / NPC
+   ========================= */
+
+.npc{
+  position:absolute;
+  right:22%;
+  bottom:30px;
+  font-size:105px;
+  z-index:4;
+}
+
+/* =========================
+   DIALOGUE / QUESTIONS
+   ========================= */
+
+.dialogue{
+  background:#fff;
+  border-radius:26px;
+  padding:24px;
+  border:3px solid #eee7ff;
+}
+
+.speaker{
+  font-weight:900;
+  color:var(--purple);
+  margin:0;
+}
+
+.dialogue h2{
+  margin:7px 0 18px;
+  font-size:25px;
+}
+
+/* =========================
+   ANSWER CHOICES
+   ========================= */
+
+.choices{
+  display:grid;
+  grid-template-columns:repeat(
+    2,
+    minmax(0,1fr)
+  );
+  gap:12px;
+}
+
+.choice{
+  border:2px solid var(--line);
+  background:#faf8ff;
+  color:var(--ink);
+  padding:14px;
+  border-radius:15px;
+  text-align:left;
+  cursor:pointer;
+  font-weight:700;
+  min-height:60px;
+}
+
+.choice:hover,
+.choice:focus{
+  border-color:var(--purple);
+  background:#f1edff;
+}
+
+.choice:disabled{
+  cursor:default;
+  opacity:.7;
+}
+
+.choice.good{
+  background:#e3f8ef;
+  border-color:#58b69a;
+}
+
+.feedback{
+  font-weight:800;
+  min-height:24px;
+}
+
+.hidden{
+  display:none;
+}
+
+/* =========================
+   FINISH SCREEN
+   ========================= */
+
+.finish-screen{
+  justify-content:center;
+  text-align:center;
+}
+
+.certificate{
+  background:#fffdf4;
+  border:10px double #e0ad3d;
+  border-radius:28px;
+  padding:36px;
+  max-width:700px;
+  width:100%;
+  box-shadow:0 12px 35px #554e7930;
+}
+
+.medal{
+  font-size:70px;
+}
+
+.eyebrow{
+  letter-spacing:3px;
+  font-weight:900;
+  color:#a57816;
+}
+
+.certificate h1{
+  font-size:42px;
+  color:#b83b85;
+}
+
+.final-score{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  flex-wrap:wrap;
+  margin:24px;
+}
+
+.award{
+  border:2px solid #e0ad3d;
+  border-radius:18px;
+  padding:18px;
+  margin:22px auto;
+  font-size:20px;
+  max-width:430px;
+}
+
+.confetti{
+  position:absolute;
+  font-size:28px;
+  letter-spacing:15px;
+}
+
+/* =========================
+   MISSION NUMBER
+   ========================= */
+
+.mission-chip{
+  position:absolute;
+  left:16px;
+  bottom:14px;
+
+  background:rgba(255,255,255,.94);
+
+  padding:8px 12px;
+  border-radius:14px;
+
+  font-weight:800;
+  color:#5b459e;
+
+  box-shadow:0 4px 12px #0002;
+
+  z-index:7;
+}
+
+/* =========================
+   POSTER
+   ========================= */
+
+.poster{
+  position:absolute;
+
+  right:18px;
+  top:58px;
+
+  width:150px;
+
+  background:#fff8d8;
+  border:5px solid #7357c7;
+  border-radius:12px;
+
+  padding:10px;
+
+  text-align:center;
+  color:#5b459e;
+
+  font-weight:900;
+  line-height:1.15;
+
+  transform:rotate(2deg);
+
+  box-shadow:0 5px 12px #0002;
+
+  z-index:5;
+}
+
+.poster small{
+  display:block;
+  color:#d34b7c;
+  margin-top:5px;
+}
+
+/* =========================
+   MINI CHALLENGES
+   ========================= */
+
+.challenge{
+  margin-top:12px;
+  padding:14px;
+
+  border:2px dashed #cbbdf2;
+  border-radius:18px;
+
+  background:#faf8ff;
+}
+
+.challenge.hidden{
+  display:none;
+}
+
+.challenge-title{
+  font-weight:900;
+  color:#5b459e;
+  margin:0 0 8px;
+}
+
+/* =========================
+   STAR COLLECTION
+   ========================= */
+
+.collect-zone{
+  position:relative;
+
+  height:145px;
+
+  border-radius:15px;
+
+  background:linear-gradient(
+    #dff5ff 0 55%,
+    #c8efb7 55%
+  );
+
+  overflow:hidden;
+}
+
+.collect-star{
+  position:absolute;
+
+  border:0;
+  background:transparent;
+
+  font-size:31px;
+
+  cursor:pointer;
+
+  filter:drop-shadow(
+    0 3px 2px #0002
+  );
+
+  animation:
+    bob 1.2s ease-in-out
+    infinite alternate;
+}
+
+.collect-star:disabled{
+  opacity:0;
+  pointer-events:none;
+}
+
+/* =========================
+   HIDDEN OBJECT GAME
+   ========================= */
+
+.object-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+}
+
+.object-btn{
+  min-height:56px;
+
+  border:2px solid #ded5f6;
+
+  background:white;
+
+  border-radius:14px;
+
+  font-size:24px;
+
+  cursor:pointer;
+}
+
+.object-btn.found{
+  background:#e6ffe9;
+  border-color:#6cc87a;
+}
+
+.mini-status{
+  font-weight:800;
+  color:#6b5a9c;
+  margin:8px 0 0;
+}
+
+/* =========================
+   ACHIEVEMENT POPUP
+   ========================= */
+
+.achievement{
+  position:absolute;
+
+  left:50%;
+  top:48%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.8);
+
+  background:#fff;
+
+  border:4px solid #ffd34f;
+
+  border-radius:20px;
+
+  padding:14px 20px;
+
+  font-weight:900;
+  color:#6a4b00;
+
+  box-shadow:
+    0 10px 30px #0003;
+
+  z-index:20;
+
+  opacity:0;
+
+  pointer-events:none;
+}
+
+.achievement.show{
+  animation:
+    popAward 1.5s ease forwards;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes popAward{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.7);
+  }
+
+  20%,
+  75%{
+    opacity:1;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+  }
+
+  100%{
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1.05);
+  }
+}
+
+@keyframes bob{
+
+  to{
+    transform:
+      translateY(-7px)
+      rotate(7deg);
+  }
+}
+
+/* =========================
+   TABLET / MOBILE
+   ========================= */
+
+@media(max-width:650px){
+
+  .topbar{
+    font-size:13px;
+    gap:8px;
+  }
+
+  .screen{
+    margin:10px;
+    padding:12px;
+  }
+
+  .start-screen{
+    min-height:auto;
+    flex-direction:column;
+    padding-top:20px;
+  }
+
+  .start-copy{
+    padding:12px;
+  }
+
+  /* Opening-screen Hoorain */
+  .hero{
+    width:70%;
+  }
+
+  /*
+     Mission scene slightly taller
+     on phones.
+  */
+  .scene{
+    height:340px;
+  }
+
+  .scene:after{
+    font-size:130px;
+    right:10px;
+    bottom:30px;
+  }
+
+  /*
+     HOORAIN ON MOBILE
+     Previous width: 190px
+     New width: 270px
+  */
+  .player{
+    width:270px;
+    height:320px;
+
+    bottom:-3px;
+    left:-2%;
+
+    object-fit:contain;
+    object-position:left bottom;
+  }
+
+  .npc{
+    font-size:75px;
+    right:12%;
+    bottom:38px;
+  }
+
+  .choices{
+    grid-template-columns:1fr;
+  }
+
+  .certificate{
+    padding:22px 15px;
+  }
+
+  .certificate h1{
+    font-size:32px;
+  }
+}
+
+/* =========================
+   SMALL PHONE
+   ========================= */
+
+@media(max-width:620px){
+
+  .poster{
+    width:112px;
+    font-size:12px;
+    right:8px;
+    top:52px;
+  }
+
+  .mission-chip{
+    font-size:12px;
+    left:8px;
+    bottom:8px;
+  }
+
+  .collect-zone{
+    height:125px;
+  }
+}
