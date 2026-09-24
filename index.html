@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#7357c7">
+  <title>Hoorain's Student Council Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="game">
+  <header class="topbar">
+    <div><strong>⭐ <span id="stars">0</span></strong> Leadership</div>
+    <div><strong>❤️ <span id="kindness">0</span></strong> Kindness</div>
+    <button id="soundBtn" class="icon-btn" aria-label="Toggle sound">🔊</button>
+  </header>
+
+  <section id="start" class="screen active start-screen">
+    <div class="start-copy">
+      <span class="badge">YEAR 3 BRONZE</span>
+      <h1>Hoorain's<br>Student Council Adventure</h1>
+      <p>You have been chosen to represent Year 3 Bronze! Listen, help, make thoughtful choices and take your class's ideas to the Student Council.</p>
+      <button class="primary" id="startBtn">Start Adventure ▶</button>
+    </div>
+    <img class="hero" src="assets/hoorain.png" alt="Cartoon Hoorain, Year 3 Bronze representative">
+  </section>
+
+  <section id="play" class="screen">
+    <div class="progress"><div id="progressFill"></div></div>
+    <div class="scene" id="scene">
+      <div class="scene-title"><span id="placeIcon">🏫</span><span id="place">Year 3 Bronze</span></div>
+      <div class="poster">⭐ VOTE FOR HOORAIN ⭐<br>YEAR 3 BRONZE<small>Kind • Helpful • A Leader</small></div>
+      <div class="mission-chip">Mission <span id="missionNo">1</span> / <span id="missionTotal">8</span></div>
+      <div id="achievement" class="achievement">⭐ Great job!</div>
+      <img class="player" src="assets/hoorain.png" alt="Hoorain">
+      <div class="npc" id="npc">👧</div>
+    </div>
+    <div class="dialogue">
+      <p class="speaker" id="speaker">Classmate</p>
+      <h2 id="question">Ready?</h2>
+      <div id="choices" class="choices"></div>
+       <div id="challenge" class="challenge hidden"></div>
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+      <button id="nextBtn" class="primary hidden">Continue →</button>
+    </div>
+  </section>
+
+  <section id="finish" class="screen finish-screen">
+    <div class="confetti">⭐ ❤️ ⭐ ❤️ ⭐</div>
+    <div class="certificate">
+      <div class="medal">🏆</div>
+      <p class="eyebrow">MISSION COMPLETE</p>
+      <h1>Wonderful work, Hoorain!</h1>
+      <p>You listened to your classmates, showed kindness and represented <strong>Year 3 Bronze</strong>.</p>
+      <div class="final-score"><span>⭐ <b id="finalStars">0</b> Leadership</span><span>❤️ <b id="finalKindness">0</b> Kindness</span></div>
+      <div class="award">Student Council Representative<br><strong>YEAR 3 BRONZE</strong></div>
+      <button class="primary" id="replayBtn">Play Again ↻</button>
+    </div>
+  </section>
+</main>
+<script src="game.js"></script>
+</body>
+</html>
